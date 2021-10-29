@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<conio.h>
+int ra ();
+int ra ()
+{
+   int i, n;
+   time_t t;
+
+   /* Intializes random number generator */
+   srand((unsigned) time(&t));
+
+   return rand() % 5;
+}
+
+int main()
+{
+    int match_sticks = 21,check,check2, user_choice, computer_choice;
+    while(match_sticks>=1)
+    {
+        printf("Total Match Sticks: %d\n", match_sticks);
+        printf("Pick up the match sticks between (1 to 4): ");
+        scanf("%d", &user_choice);
+
+        check=match_sticks-user_choice;
+        if(check==1)
+        {
+            printf("\nYOU WIN!!!!.");
+            break;
+        }
+        if(check==0)
+        {
+            printf("\nYOU LOOSE!!!!.");
+            break;
+        }
+
+        if(user_choice>4 || user_choice<1)
+        {
+            printf("Invalid Entry");
+            break;
+        }
+
+        computer_choice = ra ();
+        if (computer_choice == 0)
+        {
+            computer_choice =1;
+        }
+
+        printf("Computer picks up the %d match sticks.\n", computer_choice);
+
+        check2 = match_sticks-user_choice-computer_choice;
+        if(check2<1)
+        {
+            printf("\COMPUTER LOOSE!!!!.");
+            break;
+        }
+
+        match_sticks = match_sticks-user_choice-computer_choice;
+
+        if(match_sticks==1)
+        {
+            printf("\nYou have been lost via computer.");
+            break;
+        }
+    }
+    return(0);
+}
